@@ -1,89 +1,91 @@
-# README - Sistema de Semáforo em Java
+# 🚦 Projeto Semáforo em Java
 
-## 📋 Descrição do Projeto
+Este projeto é uma simulação de um **semáforo** implementado em **Java 21**.  
+A ideia é demonstrar conceitos de **orientação a objetos** e aplicar o **padrão de projeto State**, que organiza os diferentes estados do semáforo em classes independentes.
 
-Este projeto implementa uma simulação de semáforo em Java, desenvolvida como teste técnico para o Banco Toyota. O sistema simula o funcionamento contínuo de um semáforo com três estados (VERDE, AMARELO e VERMELHO), cada um com intervalos de tempo específicos.
+---
 
-## 🚦 Funcionalidades
+## 📌 Objetivos
+- Aprender e praticar **estruturas de controle** (`switch`, `while`, `Thread.sleep`).
+- Evoluir o código aplicando **boas práticas de Java**.
+- Demonstrar o uso do **padrão de projeto State**.
+- Tratar corretamente exceções relacionadas a **multithreading**.
 
-- Ciclo contínuo de estados do semáforo:
-    - **VERDE**: permanece ativo por 3 segundos (3000ms)
-    - **AMARELO**: permanece ativo por 1,5 segundos (1500ms)
-    - **VERMELHO**: permanece ativo por 5 segundos (5000ms)
-- Tratamento de exceções para interrupções do thread
-- Loop infinito que mantém o semáforo em funcionamento contínuo
+---
 
-## 🛠️ Tecnologias Utilizadas
-
-- **Linguagem**: Java
-- **Recursos**: Threads e tratamento de exceções
-
-## 📦 Estrutura do Projeto
+## 🏗️ Estrutura do Projeto
 
 ```
-semaforo/
-├── Semaforo.java
-└── README.md
-```
 
-## 🔧 Como Executar
+video013/
+├── SemaforoApp.java   # Classe principal
+├── Semaforo.java      # Contexto que controla o estado atual
+├── EstadoSemaforo.java# Interface que define o comportamento dos estados
+├── Verde.java         # Estado "verde"
+├── Amarelo.java       # Estado "amarelo"
+└── Vermelho.java      # Estado "vermelho"
 
-### Pré-requisitos
-- JDK (Java Development Kit) 8 ou superior instalado
+````
 
-### Compilação e Execução
+---
 
-1. Navegue até o diretório do projeto:
+## ⚙️ Como funciona
+
+1. O programa inicia com o estado **Verde**.
+2. A cada ciclo, o estado atual é executado:
+   - **Verde** → imprime `"VERDE – siga!"` e espera **3s**.
+   - **Amarelo** → imprime `"AMARELO – atenção!"` e espera **1.5s**.
+   - **Vermelho** → imprime `"VERMELHO – pare!"` e espera **5s**.
+3. O semáforo muda para o próximo estado automaticamente.
+4. O ciclo se repete infinitamente: **Verde → Amarelo → Vermelho → Verde...**
+
+---
+
+## 💻 Como executar
+
+1. Compile os arquivos:
+
 ```bash
-cd caminho/para/o/diretorio/do/projeto
-```
+javac video013/*.java
+````
 
-2. Compile o arquivo Java:
+2. Execute o programa:
+
 ```bash
-javac Semaforo.java
+java video013.SemaforoApp
 ```
 
-3. Execute o programa:
-```bash
-java Semaforo
-```
+---
 
-### Execução Alternativa com IDEs
-- **IntelliJ IDEA**: Abra o arquivo e execute com Ctrl+Shift+F10
-- **Eclipse**: Importe o projeto, clique com botão direito e selecione "Run As > Java Application"
-- **VS Code**: Instale a extensão Java, abra o arquivo e clique em "Run"
+## 🧩 Padrões e Boas Práticas
 
-## 📊 Saída do Programa
+* **Padrão State**: cada estado do semáforo é representado por uma classe (`Verde`, `Amarelo`, `Vermelho`).
+* **Encapsulamento**: a classe `Semaforo` controla a transição de estados.
+* **Tratamento de exceções**: uso de `InterruptedException` com `Thread.currentThread().interrupt()`.
+* **Extensibilidade**: fácil adicionar novos estados (ex.: `Piscando`).
 
-Ao executar, o programa exibirá no console:
+---
 
-```
-VERDE
-(aguarda 3 segundos)
-AMARELO  
-(aguarda 1,5 segundos)
-VERMELHO
-(aguarda 5 segundos)
-VERDE
-(... e repete o ciclo indefinidamente)
-```
+## 🔮 Próximos Passos (Melhorias Futuras)
 
-## ⚙️ Personalização
+* Criar uma versão com **`enum`** e **Strategy Pattern** para tempos configuráveis.
+* Implementar **Observer Pattern** para notificar "pedestres" ou "carros".
+* Usar **ExecutorService** em vez de `Thread.sleep()` para maior controle em ambientes reais.
+* Criar **testes unitários** para validar as transições de estado.
 
-Para alterar os tempos de cada estado do semáforo, modifique os valores em milissegundos nos métodos `Thread.sleep()`:
+---
 
-```java
-Thread.sleep(3000); // Verde - 3 segundos
-Thread.sleep(1500); // Amarelo - 1,5 segundos  
-Thread.sleep(5000); // Vermelho - 5 segundos
-```
+## 📚 Conceitos Estudados
 
-## 📝 Observações
+* Estruturas de repetição (`while`).
+* Estruturas de decisão (`switch` → evoluindo para State).
+* `Thread.sleep()` e tratamento de `InterruptedException`.
+* Padrão de projeto **State**.
+* Boas práticas de **Clean Code** e **SOLID**.
 
-- Este projeto foi desenvolvido como parte de um processo seletivo para o Banco Toyota
-- O código demonstra conhecimentos em programação Java, manipulação de threads e tratamento de exceções
-- Para interromper a execução, utilize Ctrl+C no terminal
+---
 
-## 👨‍💻 Autor
+## ✍️ Autor
 
-Desenvolvido como parte do processo seletivo para o Banco Toyota.
+Projeto desenvolvido para estudos de **Java 21** e **Padrões de Projeto**.
+Feito por *\[Gil Rossi Aguiar]* 🚀
